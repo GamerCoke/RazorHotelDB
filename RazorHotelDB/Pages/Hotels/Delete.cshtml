@@ -1,0 +1,38 @@
+﻿@page
+@model RazorHotelDB.Pages.Hotels.DeleteModel
+@{
+    ViewData["Title"] = "DeleteHotel";
+}
+<style>
+    .button {
+        background-color: #ff0000;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+    }
+</style>
+
+<h1>Delete</h1>
+
+@if (Model.Hotel != null && !Model.IsDeleted)
+{
+
+    <h2>@Model.Hotel.ToString()</h2>
+
+    <form method="post">
+        <button class="button"> Delete </button>
+        <input type="hidden" name="hotelNo" value=@Model.Hotel.HotelNr />
+    </form>
+}
+else if (Model.IsDeleted)
+{
+    <h2>It has been deleted</h2>
+}
+else
+{
+    <h2>It was not deleted, likely because it has attached rooms</h2>
+}

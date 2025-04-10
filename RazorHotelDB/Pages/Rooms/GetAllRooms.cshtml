@@ -1,0 +1,75 @@
+﻿@page
+@using RazorHotelDB.Models;
+@model RazorHotelDB.Pages.Rooms.GetAllRoomsModel
+@{
+    ViewData["Title"] = "GetAllRooms";
+}
+<style>
+    .button {
+        background-color: #000000; /* Black */
+        border: none;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+
+    .buttonDelete { background-color: #ff8888; padding: 4px 11px; } /* Red */
+    .buttonCreate { background-color: #00aa00; padding: 16px 32px; } /* Green */
+    .buttonUpdate { background-color: #8888ff; padding: 4px 8px; } /* Blue */
+</style>
+
+<h1>List of Rooms</h1>
+
+<a asp-page="Create" class="button buttonCreate">Create a Room</a>
+
+<form asp-page-handler="filter" method="post">
+    <legend>Filter names</legend>
+    <input type="text" name="name" value="@Model.FilterString" />
+</form>
+@if (@Model.FilterString != null)
+{
+    <h3>Filtered by "@Model.FilterString"</h3>
+}
+
+<table>
+    <thead>
+        <tr>
+            <th>Hotel no</th>
+            <th>Room no</th>
+            <th>Type</th>
+            <th>Price</th>
+            <th>Options</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Rooms.Count != 0)
+        {
+            @foreach (Room room in Model.Rooms)
+            {
+                <tr>
+                    <td>@room.HotelNr</td>
+                    <td>@room.VærelseNr</td>
+                    <td>@room.VærelseType</td>
+                    <td>@room.Pris</td>
+                    <td>
+                        <p>
+                            <a asp-page="Delete" asp-route-hotelNo=@room.HotelNr asp-route-roomNo=@room.VærelseNr
+                               class="button buttonDelete">
+                                Delete
+                            </a>
+                            <br />
+                            <a asp-page="Update" asp-route-hotelNo=@room.HotelNr asp-route-roomNo=@room.VærelseNr
+                               class="button buttonUpdate">
+                                Update
+                            </a>
+                        </p>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

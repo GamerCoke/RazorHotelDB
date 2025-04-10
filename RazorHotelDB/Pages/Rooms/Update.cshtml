@@ -1,0 +1,49 @@
+﻿@page
+@model RazorHotelDB.Pages.Rooms.UpdateModel
+@{
+    ViewData["Title"] = "UpdateRoom";
+}
+<style>
+    .button {
+        background-color: #0000ff;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+    }
+</style>
+
+
+<h1>Update</h1>
+@if (Model.UpdatedRoom == null)
+{
+    <form method="post">
+
+        <p>Original ID:  @Model.OldRID</p>
+        <input type="number" name="NewRID" value=@Model.OldRID readonly />
+        <p>Original ID:  @Model.OldHID</p>
+        <input type="number" name="NewHID" value=@Model.OldHID readonly />
+        <p>Original Price:  @Model.OldPrice</p>
+        <input type="text" name="NewPrice" />
+        <p>Original Type: @Model.OldType</p>
+        <p>Type</p><select type="text" name="NewType">
+            <option value="S" selected>Single</option>
+            <option value="D">Double</option>
+            <option value="F">Family</option>
+        </select>
+        <br />
+        <br />
+        <button class="button" type="submit">Update</button>
+        <input type="hidden" name="oldHotelNo" value=@Model.OldHID />
+        <input type="hidden" name="oldRoomNo" value=@Model.OldRID />
+
+    </form>
+}
+else
+{
+    <p>You have updated the following room</p>
+    <p>@Model.UpdatedRoom.ToString()</p>
+}

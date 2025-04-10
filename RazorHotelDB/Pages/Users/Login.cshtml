@@ -1,0 +1,24 @@
+﻿@page
+@model RazorHotelDB.Pages.Users.LoginModel
+@{
+}
+
+<h3>Login Form</h3>
+@Model.Message
+<form method="post">
+    <table>
+        <tr>
+            <td>UserName</td>
+            <td><input type="text" asp-for="@Model.UserName" /></td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td><input type="password" asp-for="@Model.PassWord" /></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td><input type="submit" value="Login" /></td>
+        </tr>
+    </table>
+</form>
+<a asp-page="CreateUser">Create a new user</a>

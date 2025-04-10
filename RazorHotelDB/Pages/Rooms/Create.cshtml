@@ -1,0 +1,42 @@
+﻿@page
+@model RazorHotelDB.Pages.Rooms.CreateModel
+@{
+    ViewData["Title"] = "CreateRoom";
+}
+<style>
+    .button {
+        background-color: #00aa00;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+    }
+</style>
+
+<h1>Create</h1>
+@if (!Model.IsCreated)
+{
+    <form method="post">
+
+        <p>Price</p><input type="text" name="Pris" />
+        <p>Type</p><select type="text" name="VærelseType">
+            <option value="S" selected>Single</option>
+            <option value="D">Double</option>
+            <option value="F">Family</option>
+        </select>
+        <p>ID</p><input type="number" name="VærelseNr" />
+        <p>Hotel ID</p><input type="number" name="HotelNr" />
+        <br />
+        <br />
+        <button class="button" type="submit">Create</button>
+
+    </form>
+}
+else
+{
+    <p>You have created the following hotel</p>
+    <p>@Model.NewRoom</p>
+}

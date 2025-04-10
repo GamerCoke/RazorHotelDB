@@ -1,0 +1,74 @@
+﻿@page
+@using RazorHotelDB.Models;
+@model RazorHotelDB.Pages.Hotels.GetAllHotelsModel
+@{
+    ViewData["Title"] = "GetAllHotels";
+}
+
+<style>
+.button {
+  background-color: #000000; /* Black */
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.buttonDelete {background-color: #ff8888; padding: 4px 11px;} /* Red */ 
+.buttonCreate {background-color: #00aa00; padding: 16px 32px;} /* Green */
+.buttonUpdate {background-color: #8888ff; padding: 4px 8px;} /* Blue */ 
+</style>
+
+<h1>List of Hotels</h1>
+
+<a asp-page="Create" class="button buttonCreate">Create a hotel</a>
+
+<form asp-page-handler="filter" method="post">
+    <legend>Filter names</legend>
+    <input type="text" name="name" value="@Model.FilterString"/>
+</form>
+@if(@Model.FilterString != null)
+{
+    <h3>Filtered by "@Model.FilterString"</h3>
+}
+
+<table>
+    <thead>
+        <tr>
+            <th>Hotel no</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Options</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Hotels.Count != 0)
+        {
+            @foreach (Hotel hotel in Model.Hotels)
+            {
+                <tr>
+                    <td>@hotel.HotelNr</td>
+                    <td>@hotel.Navn</td>
+                    <td>@hotel.Adresse</td>
+                    <td>
+                        <p>
+                            <a asp-page="Delete" asp-route-hotelNo=@hotel.HotelNr
+                            class="button buttonDelete">
+                                Delete
+                            </a>
+                            <br />
+                            <a asp-page="Update" asp-route-hotelNo=@hotel.HotelNr
+                            class="button buttonUpdate">
+                                Update
+                            </a>
+                        </p>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
